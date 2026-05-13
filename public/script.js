@@ -80,12 +80,26 @@ function formatPrice(preco) {
 }
 
 function createProductCard(produto) {
-  let card = document.createElement('h2')
+  let card = document.createElement('div')
   card.classList.add("card")
+  card.setAttribute("data-id", produto.id)
+  card.style.backgroundColor = "red"
   let title = document.createElement('h2')
   title.classList.add("card-title")
+  title.textContent = produto.nome
+  let categoryUL = document.createElement('ul')
+  categoryUL.classList.add("card-category-section")
+  let category = document.createElement('li')
+  category.classList.add("card-category")
+  category.textContent = produto.categoria
+  categoryUL.appendChild(category)
   let content = document.createElement('p')
   content.classList.add("card-content")
+  content.textContent = produto.descricao
+  card.appendChild(title)
+  card.appendChild(categoryUL)
+  card.appendChild(content)
+  return card
 }
 
 function renderCategories() {
@@ -122,4 +136,9 @@ function showProductDetails(produto) {
             </ul>
             <li><img src="${selected.imagem}" alt=""></li>
         </ul>`
+}
+
+function filterProducts(texto, categoria) {
+  const filtradoCategoria = produtos.filter(produto => produto.categoria.toLowerCase() == categoria.toLowerCase())
+  return filtradoCategoria.filter(item => item.nome.toLowerCase().includes(texto.toLowerCase()))
 }
