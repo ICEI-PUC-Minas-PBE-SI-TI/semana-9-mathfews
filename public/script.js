@@ -74,3 +74,31 @@ const data = {
       }
     ]
   }
+const category_selector = document.querySelector("#category")
+const produtos = data.produtos
+function formatPrice(preco) {
+  return `R$ ${preco.toFixed(2)}`
+}
+
+function createProductCard(produto) {
+  let card = document.createElement('h2')
+  card.classList.add("card")
+  let title = document.createElement('h2')
+  title.classList.add("card-title")
+  let content = document.createElement('p')
+  content.classList.add("card-content")
+}
+
+function renderCategories() {
+  const categories = new Set()
+  console.log(categories)
+  produtos.forEach((product) => {
+    categories.add(product.categoria)
+  })
+  categories.forEach((category) => {
+    const option = document.createElement('option')
+    option.value = category.toLowerCase()
+    option.textContent = category
+    category_selector.appendChild(option)
+  })
+}
