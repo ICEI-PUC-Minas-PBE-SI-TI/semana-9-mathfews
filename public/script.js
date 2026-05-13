@@ -75,6 +75,9 @@ const data = {
     ]
   }
 const produtos = data.produtos
+const cards = document.querySelectorAll(".card")
+const renderizar = document.getElementById("btnRender")
+const product_list = document.getElementById("product-list")
 function formatPrice(preco) {
   return `R$ ${preco.toFixed(2)}`
 }
@@ -83,7 +86,6 @@ function createProductCard(produto) {
   let card = document.createElement('div')
   card.classList.add("card")
   card.setAttribute("data-id", produto.id)
-  card.style.backgroundColor = "red"
   let title = document.createElement('h2')
   title.classList.add("card-title")
   title.textContent = produto.nome
@@ -105,7 +107,6 @@ function createProductCard(produto) {
 function renderCategories() {
   const category_selector = document.querySelector("#category")
   const categories = new Set()
-  console.log(categories)
   produtos.forEach((product) => {
     categories.add(product.categoria)
   })
@@ -142,3 +143,11 @@ function filterProducts(texto, categoria) {
   const filtradoCategoria = produtos.filter(produto => produto.categoria.toLowerCase() == categoria.toLowerCase())
   return filtradoCategoria.filter(item => item.nome.toLowerCase().includes(texto.toLowerCase()))
 }
+window.addEventListener('load', renderCategories)
+
+renderizar.addEventListener("click", () => {
+  produtos.forEach((produto) => {
+    card = createProductCard(produto)
+    product_list.appendChild(card)
+  })
+})
