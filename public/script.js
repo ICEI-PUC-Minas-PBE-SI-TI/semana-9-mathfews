@@ -89,17 +89,17 @@ function createProductCard(produto) {
 }
 
 function renderCategories() {
+  const category_selector = document.querySelector("#category")
   const categories = new Set()
   console.log(categories)
   produtos.forEach((product) => {
     categories.add(product.categoria)
   })
+  todas = document.createElement('option')
+  todas.value = "todas"
+  todas.textContent = "Todas"
+  category_selector.appendChild(todas)
   categories.forEach((category) => {
-    const category_selector = document.querySelector("#category")
-    todas = document.createElement('option')
-    todas.value = "todas"
-    todas.textContent = "Todas"
-    category_selector.appendChild(todas)
     option = document.createElement('option')
     option.value = category.toLowerCase()
     option.textContent = category
