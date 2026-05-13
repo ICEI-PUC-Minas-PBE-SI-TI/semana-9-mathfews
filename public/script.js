@@ -74,7 +74,6 @@ const data = {
       }
     ]
   }
-const category_selector = document.querySelector("#category")
 const produtos = data.produtos
 function formatPrice(preco) {
   return `R$ ${preco.toFixed(2)}`
@@ -96,7 +95,12 @@ function renderCategories() {
     categories.add(product.categoria)
   })
   categories.forEach((category) => {
-    const option = document.createElement('option')
+    const category_selector = document.querySelector("#category")
+    todas = document.createElement('option')
+    todas.value = "todas"
+    todas.textContent = "Todas"
+    category_selector.appendChild(todas)
+    option = document.createElement('option')
     option.value = category.toLowerCase()
     option.textContent = category
     category_selector.appendChild(option)
