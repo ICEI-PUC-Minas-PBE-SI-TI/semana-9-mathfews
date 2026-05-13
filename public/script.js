@@ -106,3 +106,20 @@ function renderCategories() {
     category_selector.appendChild(option)
   })
 }
+
+function showProductDetails(produto) {
+  const selected = produtos.filter(item => item.nome.toLowerCase() == produto.toLowerCase())[0]
+  const details = document.getElementById("product-details")
+  let situation = selected.emEstoque ? "Tem no estoque" : "Não tem no estoque"
+  details.innerHTML = `        <ul>
+            <li>Nome: ${selected.nome}</li>
+            <li>Preço: ${formatPrice(selected.preco)}</li>
+            <li>Categoria: ${selected.categoria}</li>
+            <li>Status de estoque: ${situation}</li>
+            <li>Descrição:</li>
+            <ul>
+                <li>${selected.descricao}</li>
+            </ul>
+            <li><img src="${selected.imagem}" alt=""></li>
+        </ul>`
+}
