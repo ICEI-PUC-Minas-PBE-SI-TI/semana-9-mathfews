@@ -4,8 +4,8 @@ Nesta atividade, será desenvolvido um programa para praticar o uso de funções
 
 ## Informações Gerais
 
-- Nome:
-- Matrícula:
+- Nome: Matheus Felipe Costa William
+- Matrícula: 927495
 
 ## Prints do trabalho
 
