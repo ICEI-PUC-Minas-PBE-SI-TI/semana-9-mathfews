@@ -32,7 +32,7 @@ const data = {
         "nome": "Headset Sony WH-1000XM5",
         "preco": 2199.00,
         "categoria": "Áudio",
-        "imagem": "https://m.media-amazon.com/images/I/61vJtKbAssL._AC_UF1000,1000_QL80_.jpg",
+        "imagem": "https://www.sony.com.br/image/6145c1d32e6ac8e63a46c912dc33c5bb?fmt=pjpeg&wid=220&bgcolor=FFFFFF&bgc=FFFFFF",
         "descricao": "Headset com cancelamento de ruído líder da indústria e excelente qualidade sonora.",
         "emEstoque": false
       },
@@ -67,7 +67,7 @@ const data = {
         "id": 8,
         "nome": "Smartwatch Apple Watch Series 8",
         "preco": 3299.00,
-        "categoria": "Wearables",
+        "categoria": "Relógios",
         "imagem": "https://imgs.casasbahia.com.br/1573150624/1xg.jpg",
         "descricao": "Smartwatch avançado com sensores de saúde, detecção de queda e tela sempre ativa.",
         "emEstoque": true
@@ -78,8 +78,10 @@ const produtos = data.produtos
 const cards = document.querySelectorAll(".card")
 const renderizar = document.getElementById("btnRender")
 const product_list = document.getElementById("product-list")
+const product_details = document.getElementById("product-details")
 const search = document.getElementById("search")
 const category_button = document.getElementById("category")
+const details = document.querySelectorAll(".card-detalhes")
 function formatPrice(preco) {
   return `R$ ${preco.toFixed(2)}`
 }
@@ -91,18 +93,40 @@ function createProductCard(produto) {
   let title = document.createElement('h2')
   title.classList.add("card-title")
   title.textContent = produto.nome
-  let categoryUL = document.createElement('ul')
-  categoryUL.classList.add("card-category-section")
-  let category = document.createElement('li')
+  let price = document.createElement('h3')
+  price.classList.add("card-price")
+  price.textContent = formatPrice(produto.preco)
+  let category = document.createElement('p')
   category.classList.add("card-category")
   category.textContent = produto.categoria
-  categoryUL.appendChild(category)
-  let content = document.createElement('p')
-  content.classList.add("card-content")
-  content.textContent = produto.descricao
+  let buttons_container = document.createElement('div')
+  buttons_container.classList.add("card-buttons-container")
+  let detalhes = document.createElement('button')
+  detalhes.classList.add("card-detalhes")
+  detalhes.textContent = "Ver Detalhes"
+  detalhes.addEventListener("click",() => {
+    showProductDetails(produto.nome)
+  })
+  let destacar = document.createElement('button')
+  destacar.classList.add("card-destacar")
+  destacar.textContent = "Destacar"
+  destacar.addEventListener("click", () => {
+    if(card.style.backgroundColor == "red") {
+      card.style.backgroundColor = "white"
+    }
+    else {
+      card.style.backgroundColor = "red"
+    }
+  })
+  let image = document.createElement('img')
+  image.src = produto.imagem
+  card.appendChild(image)
+  card.appendChild(category)
   card.appendChild(title)
-  card.appendChild(categoryUL)
-  card.appendChild(content)
+  card.appendChild(price)
+  buttons_container.appendChild(detalhes)
+  buttons_container.appendChild(destacar)
+  card.appendChild(buttons_container)
   return card
 }
 
@@ -126,18 +150,14 @@ function renderCategories() {
 
 function showProductDetails(produto) {
   const selected = produtos.filter(item => item.nome.toLowerCase() == produto.toLowerCase())[0]
-  const details = document.getElementById("product-details")
   let situation = selected.emEstoque ? "Tem no estoque" : "Não tem no estoque"
-  details.innerHTML = `        <ul>
-            <li>Nome: ${selected.nome}</li>
-            <li>Preço: ${formatPrice(selected.preco)}</li>
-            <li>Categoria: ${selected.categoria}</li>
-            <li>Status de estoque: ${situation}</li>
-            <li>Descrição:</li>
-            <ul>
-                <li>${selected.descricao}</li>
-            </ul>
-            <li><img src="${selected.imagem}" alt=""></li>
+  product_details.innerHTML = `        <ul>
+            <p id="details_name">${selected.nome}</p>
+            <p id="details_price">${formatPrice(selected.preco)}</p>
+            <p id="details_category">${selected.categoria}</p>
+            <p id="details_status">${situation}</p>
+            <p id="details_description">${selected.descricao}</p>
+            <img id="details_img" src="${selected.imagem}" alt="">
         </ul>`
 }
 
@@ -149,10 +169,10 @@ function filterProductsByCategory(categoria) {
   return produtos.filter(produto => produto.categoria.toLowerCase() == categoria.toLowerCase())
 }
 window.addEventListener('load', renderCategories)
-
-
 category_button.addEventListener("change", () => {
   product_list.replaceChildren("")
+  product_details.replaceChildren("")
+  search.value = ""
   let texto = category_button.value
   let products = filterProductsByCategory(texto)
   products.forEach((product) => {
@@ -161,6 +181,10 @@ category_button.addEventListener("change", () => {
   })
 })
 
+produtos.forEach((produto) => {
+  let card = createProductCard(produto)
+  product_list.appendChild(card)
+})
 
 renderizar.addEventListener("click", () => {
   let texto = search.value
@@ -182,8 +206,15 @@ renderizar.addEventListener("click", () => {
     }
   }
   else {
+    let products = filterProductsByCategory(categoria)
     if (search.value == "") {
-      let products = filterProductsByCategory(categoria)
+      products.forEach((produto) => {
+        let card = createProductCard(produto)
+        product_list.appendChild(card)
+      })
+    }
+    else {
+      let products = filterProductsByName(texto)
       products.forEach((produto) => {
         let card = createProductCard(produto)
         product_list.appendChild(card)
