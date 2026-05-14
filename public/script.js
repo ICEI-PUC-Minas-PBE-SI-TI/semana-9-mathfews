@@ -78,6 +78,8 @@ const produtos = data.produtos
 const cards = document.querySelectorAll(".card")
 const renderizar = document.getElementById("btnRender")
 const product_list = document.getElementById("product-list")
+const search = document.getElementById("search")
+const category_button = document.getElementById("category")
 function formatPrice(preco) {
   return `R$ ${preco.toFixed(2)}`
 }
@@ -139,15 +141,53 @@ function showProductDetails(produto) {
         </ul>`
 }
 
-function filterProducts(texto, categoria) {
-  const filtradoCategoria = produtos.filter(produto => produto.categoria.toLowerCase() == categoria.toLowerCase())
-  return filtradoCategoria.filter(item => item.nome.toLowerCase().includes(texto.toLowerCase()))
+function filterProductsByName(texto) {
+  return produtos.filter(produto => produto.nome.toLowerCase().includes(texto.toLowerCase()))
+}
+
+function filterProductsByCategory(categoria) {
+  return produtos.filter(produto => produto.categoria.toLowerCase() == categoria.toLowerCase())
 }
 window.addEventListener('load', renderCategories)
 
-renderizar.addEventListener("click", () => {
-  produtos.forEach((produto) => {
-    card = createProductCard(produto)
+
+category_button.addEventListener("change", () => {
+  product_list.replaceChildren("")
+  let texto = category_button.value
+  let products = filterProductsByCategory(texto)
+  products.forEach((product) => {
+    let card = createProductCard(product)
     product_list.appendChild(card)
   })
+})
+
+
+renderizar.addEventListener("click", () => {
+  let texto = search.value
+  let categoria = category_button.value
+  product_list.replaceChildren("")
+  if (categoria == "todas") {
+    if (search.value == "") {
+      produtos.forEach((produto) => {
+        let card = createProductCard(produto)
+        product_list.appendChild(card)
+      })
+    }
+    else {
+      const products = filterProductsByName(texto)
+      products.forEach((produto) => {
+        let card = createProductCard(produto)
+        product_list.appendChild(card)
+      })
+    }
+  }
+  else {
+    if (search.value == "") {
+      let products = filterProductsByCategory(categoria)
+      products.forEach((produto) => {
+        let card = createProductCard(produto)
+        product_list.appendChild(card)
+      })
+    }
+  }
 })
