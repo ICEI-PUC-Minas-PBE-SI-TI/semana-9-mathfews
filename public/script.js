@@ -190,6 +190,7 @@ category_button.addEventListener("change", () => {
 produtos.forEach((produto) => {
   let card = createProductCard(produto)
   product_list.appendChild(card)
+  console.log(`Data-ID: ${card.dataset.id}`)
 })
 
 renderizar.addEventListener("click", () => {
