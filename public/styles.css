@@ -1,65 +1,69 @@
-body {
-    background-color: rgb(167, 182, 182);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.card {
+
+img {
+    width: 20px;
+}
+
+body {
+    font-family: Inter;
     display: flex;
     flex-direction: column;
-    width: 250px;
-    border-radius: 15px;
-    color: rgb(0, 0, 0);
-    background-color: white;
-    overflow: hidden;
-    padding: 20px;
-    img {
-        display: flex;
-        width: 200px;
-        padding: 20px;
+    gap: 50px;
+}
+
+#title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #92c96d;
+    padding: 60px;
+    margin: 0;
+    color: white;
+    h1 {
+        font-size: 2em;
     }
+    p {
+        font-weight: 300;
+    }
+}
+#user_input {
+    display: flex;
+    justify-self: center;
+    gap: 20px;
     button {
         border: none;
-        padding: 10px;
+        background-color: #92c96d;
+        color: white;
+        transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
     }
-    .card-price {
-        color: red;
+    button,select,input {
+        padding: 15px;
+        border-radius: 10px;
     }
-    .card-buttons-container {
-        display: flex;
-        gap: 50px;
+    select {
+        border: none;
+        transition: outiline 0.2s ease-in-out;
     }
-    .card-category {
-        display: flex;
-        justify-content: center;
+    input {
+        border: none;
+        border: 1px solid #c6d2bd;
+        padding-right: 300px;
+        transition: outiline 0.2s ease-in-out;
     }
-}
-#container {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-}
-
-#product-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 50px;
-}
-
-#product-details {
-    background-color: white;
-    border-radius: 20px;
-    overflow: hidden;
-    height: fit-content;
-    height: 30%;
-    margin-right: 100px;
-    img {
-        display: flex;
-        justify-content: center;
-        width: 300px;
+    button:hover {
+        background-color: #5a8e37;
+        transform: translateY(-2px);
     }
-}
-
-#content-container {
-    display: flex;
-    flex-direction: row;
+    input:focus {
+        outline: 1px solid #92c96d;
+    }
+    select:focus {
+        outline: 1px solid #92c96d;
+    }
 }
