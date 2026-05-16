@@ -9,8 +9,8 @@ Nesta atividade, será desenvolvido um programa para praticar o uso de funções
 
 ## Prints do trabalho
 
-<<  COLOQUE A IMAGEM - TELA DE CARDS DE PRODUTOS - AQUI >>
+![tela dos cards](img/image.png)
 
-<<  COLOQUE A IMAGEM - TELA DE DETALHE DO PRODUTO - AQUI >>
+![tela detalhe dos produtos](img/image1.png)
 
-<<  COLOQUE A IMAGEM - TELA DO CONSOLE - AQUI >>
+![tela do console](img/image2.png)
