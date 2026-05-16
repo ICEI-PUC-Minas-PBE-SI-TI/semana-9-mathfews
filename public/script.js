@@ -111,11 +111,14 @@ function createProductCard(produto) {
   destacar.classList.add("card-destacar")
   destacar.textContent = "Destacar"
   destacar.addEventListener("click", () => {
-    if(card.style.backgroundColor == "red") {
-      card.style.backgroundColor = "white"
-    }
-    else {
-      card.style.backgroundColor = "red"
+    const corPadrão = "rgb(183, 199, 172)"
+    const corDestaque = "orange"
+    if (card.style.borderColor === corDestaque) {
+      card.style.borderColor = corPadrão
+      destacar.style.backgroundColor = "rgb(146, 201, 109)"
+    } else {
+      card.style.borderColor = corDestaque
+      destacar.style.backgroundColor = corDestaque
     }
   })
   let image = document.createElement('img')
@@ -150,12 +153,15 @@ function renderCategories() {
 
 function showProductDetails(produto) {
   const selected = produtos.filter(item => item.nome.toLowerCase() == produto.toLowerCase())[0]
-  let situation = selected.emEstoque ? "Tem no estoque" : "Não tem no estoque"
+  let situation_text = selected.emEstoque ? "Tem no estoque" : "Não tem no estoque"
+  let situtation_color = selected.emEstoque ? "rgb(57, 211, 43)" : "rgb(235, 84, 84)"
+  let situtation_border = selected.emEstoque ? "rgb(112, 232, 101)" : "rgb(247, 162, 162)"
+  let situation_background = selected.emEstoque ? "rgb(216, 255, 219)" : "rgb(255, 216, 216)"
   product_details.innerHTML = `        <ul>
             <p id="details_name">${selected.nome}</p>
             <p id="details_price">${formatPrice(selected.preco)}</p>
             <p id="details_category">${selected.categoria}</p>
-            <p id="details_status">${situation}</p>
+            <p id="details_status" style="color:${situtation_color}; border-color: ${situtation_border}; background-color: ${situation_background}">${situation_text}</p>
             <p id="details_description">${selected.descricao}</p>
             <img id="details_img" src="${selected.imagem}" alt="">
         </ul>`

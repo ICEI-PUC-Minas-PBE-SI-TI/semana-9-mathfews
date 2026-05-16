@@ -6,7 +6,7 @@
 
 
 img {
-    width: 20px;
+    width: 250px;
 }
 
 body {
@@ -66,4 +66,117 @@ body {
     select:focus {
         outline: 1px solid #92c96d;
     }
+}
+
+#content-container {
+    display: flex;
+    gap: 40px;
+    padding-top: 50px;
+}
+
+#product-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 800px;
+    padding-left: 20px;
+}
+
+#product-details {
+    overflow: hidden;
+    padding: 30px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #c6d2bd;
+    border-radius: 10px;
+    max-width: 450px;
+    max-height: fit-content;
+    position: sticky;
+    top: 20px;
+    align-self: start;
+    height: auto;
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    #details_name {
+        font-size: 1.5em;
+        font-weight: 600;
+    }
+    #details_price {
+        font-size: 1.5em;
+        font-weight: 600;
+        color: #2e4d19;
+    }
+    #details_category {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 9px;
+        border-radius: 6px;
+        font-size: 0.9em;
+        background-color: #a0db78;
+        width: fit-content;
+    }
+    #details_status {
+        display: flex;
+        justify-content: center;
+        border-radius: 10px;
+        padding: 15px;
+        width: 100%;
+        border: 0.5px solid rgb(247, 162, 162);
+        background-color: rgb(216, 255, 219);
+        font-weight: 600;
+    }
+    #details_description {
+        padding: 20px;
+        color: rgb(116, 116, 116);
+        padding-bottom: 0;
+    }
+    img {
+        margin-top: 50px;
+        justify-self: center;
+        object-fit: contain;
+    }
+}
+
+
+.card {
+    border: 1px solid rgb(183, 199, 172);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    height: 100%;
+    transition: transform 0.2s ease-in-out;
+    .card-buttons-container {
+        display: flex;
+        gap: 10px;
+        margin-top: auto;
+        padding-top: 15px;
+        button {
+            padding: 10px;
+            border: none;
+            background-color: rgb(146, 201, 109);
+            border-radius: 5px;
+            color: rgb(255, 255, 255);
+        }
+    }
+    .card-price, .card-category {
+        font-weight: 600;
+        color: #2e4d19;
+    }
+    h2 {
+        font-size: 1em;
+    }
+    img {
+        width: 100%;
+        height: 180px;
+        object-fit: contain;
+        margin-bottom: 15px;
+        display: block;
+    }
+}
+.card:hover {
+    transform: scale(102%) translateY(-2px);
+    border-color: #92c96d;
 }
